@@ -1,0 +1,63 @@
+id,name,parent,monarch,gender
+will1,William I,,1,m
+will2,William II,will1,1,m
+hen1,Henry I,will1,1,m
+adela,Adela of Normandy,will1,0,f
+stephen,Stephen,adela,1,m
+matilda,Matilda,hen1,1,f
+hen2,Henry II,matilda,1,m
+rich1,Richard I,hen2,1,m
+john,John,hen2,1,m
+hen3,Henry III,john,1,m
+ed1,Edward I,hen3,1,m
+ed2,Edward II,ed1,1,m
+ed3,Edward III,ed2,1,m
+black,"Edward, The Black Prince",ed3,0,m
+rich2,Richard II,black,1,m
+gaunt,John of Gaunt,ed3,0,m
+hen4,Henry IV,gaunt,1,m
+hen5,Henry V,hen4,1,m
+hen6,Henry VI,hen5,1,m
+joanbeau,Joan Beaufort,gaunt,0,f
+cecnev,Cecily Neville,joanbeau,0,f
+ed4,Edward IV,cecnev,1,m
+ed5,Edward V,ed4,1,m
+rich3,Richard III,cecnev,1,m
+johnbeau,"John Beaufort, Earl of Somerset",gaunt,0,m
+johnbea2,"John Beaufort, Duke of Somerset",johnbeau,0,m
+margbeau,Margaret Beaufort,johnbea2,0,f
+hen7,Henry VII,margbeau,1,m
+hen8,Henry VIII,hen7,1,m
+ed6,Edward VI,hen8,1,m
+marytud,Mary Tudor,hen7,0,f
+franbran,Frances Brandon,marytud,0,f
+jane,Jane Grey,franbran,1,f
+mary1,Mary I,hen8,1,f
+eliz1,Elizabeth I,hen8,1,f
+margtud,Margaret Tudor,hen7,0,f
+james5s,James V of Scotland,margtud,0,m
+maryqs,"Mary, Queen of Scots",james5s,0,f
+james1,James I and VI,maryqs,1,m
+char1,Charles I,james1,1,m
+char2,Charles II,char1,1,m
+james2,James II and VII,char1,1,m
+mary2,Mary II,james2,1,f
+marypr,"Mary, Princess Royal",char1,0,f
+will3,William III,marypr,1,m
+anne,Anne,james2,1,f
+elizstu,Elizabeth Stuart,james1,0,f
+sophia,Sophia of Hanover,elizstu,0,f
+george1,George I,sophia,1,m
+george2,George II,george1,1,m
+fred,Prince Frederick,george2,0,m
+george3,George III,fred,1,m
+george4,George IV,george3,1,m
+will4,William IV,george3,1,m
+princeed,"Prince Edward, Duke of Kent and Strathearn",george3,0,m
+victoria,Victoria,princeed,1,f
+ed7,Edward VII,victoria,1,m
+george5,George V,ed7,1,m
+ed8,Edward VIII,george5,1,m
+george6,George VI,george5,1,m
+eliz2,Elizabeth II,george6,1,f
+char3,Charles III,eliz2,1,m

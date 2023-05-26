@@ -1,0 +1,74 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use feature 'say';
+
+use Text::ParseWords;
+use JSON;
+
+use Genealogy::Relationship;
+use Person;
+
+my %people;
+my @monarchs;
+
+chomp(my $head = <>);
+my @cols = split /,/, $head;
+
+while (<>) {
+  chomp;
+  my %p;
+  @p{@cols} = parse_line(',', 0, $_);
+
+  if ($p{parent}) {
+    if (!exists $people{$p{parent}}) {
+      warn "$p{name} -> $p{parent}\n";
+      next;
+    }
+    $p{parent} = $people{$p{parent}};
+  } else {
+    $p{parent} = undef;
+  }
+
+  my $person = Person->new(%p);
+
+  $people{$person->id} = $person;
+  push @monarchs, $person->id if $person->monarch;
+}
+
+for (keys %people) {
+  next unless $people{$_}->parent;
+  warn $people{$_}->name unless $people{$_}->parent;
+}
+
+my @monarchs2 = @monarchs;
+
+my $rel = Genealogy::Relationship->new;
+
+my %rels;
+
+for my $m1 (@monarchs) {
+  for my $m2 (@monarchs2) {
+    next if $m1 eq $m2;
+
+    my $ancestors = $rel->get_relationship_ancestors($people{$m1}, $people{$m2});
+    $ancestors->[0] = [ map { $_->name } @{$ancestors->[0]} ];
+    $ancestors->[1] = [ map { $_->name } @{$ancestors->[1]} ];
+
+    $rels{$people{$m1}->name}{$people{$m2}->name} = {
+      rel  => $rel->get_relationship($people{$m1}, $people{$m2}),
+      mrca => $rel->most_recent_common_ancestor($people{$m1}, $people{$m2})->name,
+      ancestors => $ancestors,
+    };
+  }
+}
+
+my $json = JSON->new->pretty;
+
+open my $rel_fh, '>', 'royal_rels.js' or die $!;
+
+say $rel_fh 'var rels = ', $json->encode(\%rels) . ';';
+say $rel_fh "\n";
+say $rel_fh 'var monarchs = ', $json->encode([ map { $people{$_}->name } @monarchs ]) . ';';
