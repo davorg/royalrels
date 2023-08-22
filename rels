@@ -70,7 +70,7 @@ for my $m1 (@monarchs) {
 
 my $json = JSON->new->pretty;
 
-open my $rel_fh, '>', 'data.js' or die $!;
+open my $rel_fh, '>', 'docs/data.js' or die $!;
 
 say $rel_fh 'var rels = ', $json->encode(\%rels) . ';';
 say $rel_fh "\n";
