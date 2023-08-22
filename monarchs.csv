@@ -35,8 +35,8 @@ jane,Jane Grey,franbran,1,f,1537,1554
 mary1,Mary I,hen8,1,f,1516,1558
 eliz1,Elizabeth I,hen8,1,f,1533,1603
 margtud,Margaret Tudor,hen7,0,f,1489,1541
-james5s,James V of Scotland,margtud,0,m,1512,1542
-maryqs,"Mary, Queen of Scots",james5s,0,f,1542,1587
+james5s,James V of Scotland,margtud,1,m,1512,1542
+maryqs,"Mary, Queen of Scots",james5s,1,f,1542,1587
 james1,James I and VI,maryqs,1,m,1566,1625
 char1,Charles I,james1,1,m,1600,1649
 char2,Charles II,char1,1,m,1630,1685
