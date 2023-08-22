@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dropdown Example</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    .dropdown-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    .dropdown-container .form-group {
+      width: 49%; /* Reduced width */
+    }
+    span.box {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #000;
+    }
+    span.mcra {
+      background-color: #ccffff;
+    }
+    span.from {
+      background-color: #ccffcc;
+    }
+    span.to {
+      background-color: #ffcccc;
+    }
+    span.monarch {
+      background-color: #ffffcc;
+    }
+    div#legend {
+      border: 1px solid #000;
+      padding: 10px;
+      position: absolute;
+      top: 25%;
+      right: 10%;
+    }
+    canvas {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Monarchs Dropdowns</h1>
+
+    <div class="dropdown-container">
+      <div class="form-group">
+        <label for="dropdown1">Dropdown 1</label>
+        <select class="form-control" id="dropdown1"></select>
+      </div>
+
+      <div class="form-group">
+        <label for="dropdown2">Dropdown 2</label>
+        <select class="form-control" id="dropdown2"></select>
+      </div>
+    </div>
+
+    <div class="result-container">
+      <h2>Relationship:</h2>
+      <div id="relationship"></div>
+    </div>
+
+    <h2>Relationship Diagram</h2>
+    <canvas id="canvas"></canvas>
+    <div id="legend">
+      <h3>Legend</h3>
+      <p><span class="box mcra"></span> Most recent common ancestor<br>
+        <span class="box from"></span> Monarch we're starting from<br>
+        <span class="box to"></span> Monarch we're going to<br>
+        <span class="box monarch"></span> Other monarchs</p>
+    </div>
+
+  </div>
+
+  <script src="data.js"></script>
+  <script src="rels.js"></script>
+
+</body>
+</html>
