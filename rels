@@ -3,6 +3,9 @@
 use strict;
 use warnings;
 
+use FindBin '$RealBin';
+use lib "$RealBin/lib";
+
 use feature 'say';
 
 use Text::ParseWords;
@@ -54,12 +57,12 @@ for my $m1 (@monarchs) {
     next if $m1 eq $m2;
 
     my $ancestors = $rel->get_relationship_ancestors($people{$m1}, $people{$m2});
-    $ancestors->[0] = [ map { $_->name } @{$ancestors->[0]} ];
-    $ancestors->[1] = [ map { $_->name } @{$ancestors->[1]} ];
+    $ancestors->[0] = [ reverse map { $_->id } @{$ancestors->[0]} ];
+    $ancestors->[1] = [ reverse map { $_->id } @{$ancestors->[1]} ];
 
-    $rels{$people{$m1}->name}{$people{$m2}->name} = {
+    $rels{$people{$m1}->id}{$people{$m2}->id} = {
       rel  => $rel->get_relationship($people{$m1}, $people{$m2}),
-      mrca => $rel->most_recent_common_ancestor($people{$m1}, $people{$m2})->name,
+      mrca => $rel->most_recent_common_ancestor($people{$m1}, $people{$m2})->id,
       ancestors => $ancestors,
     };
   }
@@ -71,4 +74,5 @@ open my $rel_fh, '>', 'data.js' or die $!;
 
 say $rel_fh 'var rels = ', $json->encode(\%rels) . ';';
 say $rel_fh "\n";
-say $rel_fh 'var monarchs = ', $json->encode([ map { $people{$_}->name } @monarchs ]) . ';';
+say $rel_fh 'var people = ', $json->encode({ map { $_ => $people{$_}->as_hashref } keys %people }) . ';';
+say $rel_fh 'var monarchs = ', $json->encode([ map { $people{$_}->id } @monarchs ]) . ';';
