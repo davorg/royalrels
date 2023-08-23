@@ -1,54 +1,75 @@
 
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-  // Get the dropdown elements
-  var dropdown1 = document.getElementById('dropdown1');
-  var dropdown2 = document.getElementById('dropdown2');
+    // Ensure the canvas is the same width as the window
+    var canvas = document.getElementById('canvas');
+    canvas.width = window.innerWidth;
 
-  // Add a "Pick a monarch..." to each dropdown
-  var option1Initial = document.createElement('option');
-  option1Initial.text = 'Pick a monarch...';
-  dropdown1.add(option1Initial);
+    // Ensure the canvas is twice the height of the window
+    canvas.height = window.innerHeight * 2;
 
-  var option2Initial = document.createElement('option');
-  option2Initial.text = 'Pick a monarch...';
-  dropdown2.add(option2Initial);
+    // Get parameters from the query string
+    var urlParams = new URLSearchParams(window.location.search);
 
-  // Populate the dropdowns
-  monarchs.forEach(function(monarch) {
-    var option1 = document.createElement('option');
-    var option2 = document.createElement('option');
-
-    option1.text = people[monarch].name;
-    option1.value = people[monarch].id;
-    option2.text = people[monarch].name;
-    option2.value = people[monarch].id;
-
-    dropdown1.add(option1);
-    dropdown2.add(option2);
-  });
-
-  // Add an event listener to the both dropdowns for the "change" event
-  dropdown1.addEventListener('change', handleDropdownChange);
-  dropdown2.addEventListener('change', handleDropdownChange);
-
-  // Ensure the canvas is the same width as the window
-  var canvas = document.getElementById('canvas');
-  canvas.width = window.innerWidth;
-
-  // Ensure the canvas is twice the height of the window
-  canvas.height = window.innerHeight * 2;
+    // Set up the dropdown elements
+    document.querySelectorAll('.monarchs').forEach(function(dropdown) {
+      setUpMonarchDropdown(dropdown, urlParams);
+    });
 });
 
+function setUpMonarchDropdown(dropdown, urlParams) {
+    // Add a "Pick a monarch..." to dropdown
+    var optionInitial = document.createElement('option');
+    optionInitial.text = 'Pick a monarch...';
+    optionInitial.value = '';
+    dropdown.add(optionInitial);
+
+    // Populate the dropdown
+    monarchs.forEach(function(monarch) {
+        var option = document.createElement('option');
+
+        option.text = people[monarch].name;
+        option.value = people[monarch].id;
+
+        dropdown.add(option);
+    });
+
+    // Add an event listener to the dropdown for the "change" event
+    dropdown.addEventListener('change', handleDropdownChange);
+
+    // If dropdown.id is a key in the query string, then find that
+    // monarch in the dropdown and set it as the selected monarch
+    if (urlParams.has(dropdown.id)) {
+      for (var i = 0; i < dropdown.options.length; i++) {
+        if (dropdown.options[i].value == urlParams.get(dropdown.id)) {
+          dropdown.selectedIndex = i;
+          break;
+        }
+      }
+      // trigger the change event
+      dropdown.dispatchEvent(new Event('change'));
+    }
+}
+
 function handleDropdownChange() {
+  // Get the dropdown elements
+  var fromDropdown = document.getElementById('from');
+  var toDropdown   = document.getElementById('to');
+
+  // Update the parameters in the query string
+  var urlParams = new URLSearchParams(window.location.search);
+  urlParams.set(fromDropdown.id, fromDropdown.value);
+  urlParams.set(toDropdown.id, toDropdown.value);
+  // Update the URL in the browser
+  window.history.replaceState({}, '', `${location.pathname}?${urlParams}`);
 
   // Only do anything if the user has selected a monarch in both dropdowns
   // and the monarchs are different
-  if (dropdown1.selectedIndex > 0 && dropdown2.selectedIndex > 0 
-      && dropdown1.selectedIndex != dropdown2.selectedIndex) {
+  if (fromDropdown.selectedIndex > 0 && toDropdown.selectedIndex > 0
+      && fromDropdown.selectedIndex != toDropdown.selectedIndex) {
     // Get the selected monarchs
-    var monarchId1 = dropdown1.options[dropdown1.selectedIndex].value;
-    var monarchId2 = dropdown2.options[dropdown2.selectedIndex].value;
+    var monarchId1 = fromDropdown.options[fromDropdown.selectedIndex].value;
+    var monarchId2 = toDropdown.options[toDropdown.selectedIndex].value;
 
     // Get rels[monarch1][monarch2] and rels[monarch2][monarch1]
     var rel1 = rels[monarchId1][monarchId2].rel;
