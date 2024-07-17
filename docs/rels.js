@@ -1,3 +1,15 @@
+function updateOGTags(title, description) {
+  var ogTitle = document.querySelector('meta[property="og:title"]');
+  var ogDescription = document.querySelector('meta[property="og:description"]');
+
+  if (ogTitle) {
+    ogTitle.setAttribute('content', title);
+  }
+
+  if (ogDescription) {
+    ogDescription.setAttribute('content', description);
+  }
+}
 
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -92,6 +104,11 @@ function handleDropdownChange() {
     var relationshipDiv = document.getElementById('relationship');
     relationshipDiv.innerHTML = monarch1.name + ' is ' + rel1 + ' of ' + monarch2.name + '<br>'
                               + monarch2.name + ' is ' + rel2 + ' of ' + monarch1.name;
+
+    // Update OG tags
+    var ogTitle = monarch1.name + ' and ' + monarch2.name + ' Relationship';
+    var ogDescription = 'Discover the relationship between ' + monarch1.name + ' and ' + monarch2.name;
+    updateOGTags(ogTitle, ogDescription);
 
     // Get the rels[monarch1][monarch2].ancestors
     var ancestors = rels[monarchId1][monarchId2].ancestors;
