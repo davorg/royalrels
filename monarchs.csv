@@ -26,8 +26,9 @@ rich3,Richard III,cecnev,1,m,1452,1485
 johnbeau,"John Beaufort, Earl of Somerset",gaunt,0,m,1373,1410
 johnbea2,"John Beaufort, Duke of Somerset",johnbeau,0,m,1404,1444
 margbeau,Margaret Beaufort,johnbea2,0,f,1443,1509
+elizyork,Elizabeth of York,ed4,0,f,1466,1503
 hen7,Henry VII,margbeau,1,m,1457,1509
-hen8,Henry VIII,hen7,1,m,1491,1547
+hen8,Henry VIII,elizyork,1,m,1491,1547
 ed6,Edward VI,hen8,1,m,1537,1553
 marytud,Mary Tudor,hen7,0,f,1496,1533
 franbran,Frances Brandon,marytud,0,f,1517,1559
