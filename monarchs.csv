@@ -1,64 +1,64 @@
-id,name,parent,monarch,gender,birth,death
-will1,William I,,1,m,c1028,1087
-will2,William II,will1,1,m,c1057,1100
-hen1,Henry I,will1,1,m,c1068,1135
-adela,Adela of Normandy,will1,0,f,c1067,1137
-stephen,Stephen,adela,1,m,1092/1096,1154
-matilda,Matilda,hen1,1,f,1102,1167
-hen2,Henry II,matilda,1,m,1133,1189
-rich1,Richard I,hen2,1,m,1157,1199
-john,John,hen2,1,m,1166,1216
-hen3,Henry III,john,1,m,1207,1272
-ed1,Edward I,hen3,1,m,1239,1307
-ed2,Edward II,ed1,1,m,1284,1327
-ed3,Edward III,ed2,1,m,1312,1377
-black,"Edward, The Black Prince",ed3,0,m,1330,1376
-rich2,Richard II,black,1,m,1367,1400
-gaunt,John of Gaunt,ed3,0,m,1340,1399
-hen4,Henry IV,gaunt,1,m,1367,1413
-hen5,Henry V,hen4,1,m,1386,1422
-hen6,Henry VI,hen5,1,m,1421,1471
-joanbeau,Joan Beaufort,gaunt,0,f,1379,1440
-cecnev,Cecily Neville,joanbeau,0,f,1415,1495
-ed4,Edward IV,cecnev,1,m,1442,1483
-ed5,Edward V,ed4,1,m,1470,1483
-rich3,Richard III,cecnev,1,m,1452,1485
-johnbeau,"John Beaufort, Earl of Somerset",gaunt,0,m,1373,1410
-johnbea2,"John Beaufort, Duke of Somerset",johnbeau,0,m,1404,1444
-margbeau,Margaret Beaufort,johnbea2,0,f,1443,1509
-elizyork,Elizabeth of York,ed4,0,f,1466,1503
-hen7,Henry VII,margbeau,1,m,1457,1509
-hen8,Henry VIII,elizyork,1,m,1491,1547
-ed6,Edward VI,hen8,1,m,1537,1553
-marytud,Mary Tudor,hen7,0,f,1496,1533
-franbran,Frances Brandon,marytud,0,f,1517,1559
-jane,Jane Grey,franbran,1,f,1537,1554
-mary1,Mary I,hen8,1,f,1516,1558
-eliz1,Elizabeth I,hen8,1,f,1533,1603
-margtud,Margaret Tudor,hen7,0,f,1489,1541
-james5s,James V of Scotland,margtud,1,m,1512,1542
-maryqs,"Mary, Queen of Scots",james5s,1,f,1542,1587
-james1,James I and VI,maryqs,1,m,1566,1625
-char1,Charles I,james1,1,m,1600,1649
-char2,Charles II,char1,1,m,1630,1685
-james2,James II and VII,char1,1,m,1633,1701
-mary2,Mary II,james2,1,f,1662,1694
-marypr,"Mary, Princess Royal",char1,0,f,1631,1660
-will3,William III,marypr,1,m,1650,1702
-anne,Anne,james2,1,f,1665,1714
-elizstu,Elizabeth Stuart,james1,0,f,1596,1662
-sophia,Sophia of Hanover,elizstu,0,f,1630,1714
-george1,George I,sophia,1,m,1660,1727
-george2,George II,george1,1,m,1683,1760
-fred,Prince Frederick,george2,0,m,1707,1751
-george3,George III,fred,1,m,1738,1820
-george4,George IV,george3,1,m,1762,1830
-will4,William IV,george3,1,m,1765,1837
-princeed,"Prince Edward, Duke of Kent and Strathearn",george3,0,m,1767,1820
-victoria,Victoria,princeed,1,f,1819,1901
-ed7,Edward VII,victoria,1,m,1841,1910
-george5,George V,ed7,1,m,1865,1936
-ed8,Edward VIII,george5,1,m,1894,1972
-george6,George VI,george5,1,m,1895,1952
-eliz2,Elizabeth II,george6,1,f,1926,2022
-char3,Charles III,eliz2,1,m,1948,
+id,name,monarch,gender,birth,death,father,mother
+will1,William I,1,m,c1028,1087,,
+will2,William II,1,m,c1057,1100,will1,
+hen1,Henry I,1,m,c1068,1135,will1,
+adela,Adela of Normandy,0,f,c1067,1137,will1,
+stephen,Stephen,1,m,1092/1096,1154,,adela
+matilda,Matilda,1,f,1102,1167,hen1,
+hen2,Henry II,1,m,1133,1189,,matilda
+rich1,Richard I,1,m,1157,1199,hen2,
+john,John,1,m,1166,1216,hen2,
+hen3,Henry III,1,m,1207,1272,john,
+ed1,Edward I,1,m,1239,1307,hen3,
+ed2,Edward II,1,m,1284,1327,ed1,
+ed3,Edward III,1,m,1312,1377,ed2,
+black,"Edward, The Black Prince",0,m,1330,1376,ed3,
+rich2,Richard II,1,m,1367,1400,black,
+gaunt,John of Gaunt,0,m,1340,1399,ed3,
+hen4,Henry IV,1,m,1367,1413,gaunt,
+hen5,Henry V,1,m,1386,1422,hen4,
+hen6,Henry VI,1,m,1421,1471,hen5,
+joanbeau,Joan Beaufort,0,f,1379,1440,gaunt,
+cecnev,Cecily Neville,0,f,1415,1495,,joanbeau
+ed4,Edward IV,1,m,1442,1483,,cecnev
+ed5,Edward V,1,m,1470,1483,ed4,
+rich3,Richard III,1,m,1452,1485,,cecnev
+johnbeau,"John Beaufort, Earl of Somerset",0,m,1373,1410,gaunt,
+johnbea2,"John Beaufort, Duke of Somerset",0,m,1404,1444,johnbeau,
+margbeau,Margaret Beaufort,0,f,1443,1509,johnbea2,
+elizyork,Elizabeth of York,0,f,1466,1503,ed4,
+hen7,Henry VII,1,m,1457,1509,,margbeau
+hen8,Henry VIII,1,m,1491,1547,hen7,elizyork
+ed6,Edward VI,1,m,1537,1553,hen8,
+marytud,Mary Tudor,0,f,1496,1533,hen7,
+franbran,Frances Brandon,0,f,1517,1559,,marytud
+jane,Jane Grey,1,f,1537,1554,,franbran
+mary1,Mary I,1,f,1516,1558,hen8,
+eliz1,Elizabeth I,1,f,1533,1603,hen8,
+margtud,Margaret Tudor,0,f,1489,1541,hen7,
+james5s,James V of Scotland,1,m,1512,1542,,margtud
+maryqs,"Mary, Queen of Scots",1,f,1542,1587,james5s,
+james1,James I and VI,1,m,1566,1625,,maryqs
+char1,Charles I,1,m,1600,1649,james1,
+char2,Charles II,1,m,1630,1685,char1,
+james2,James II and VII,1,m,1633,1701,char1,
+mary2,Mary II,1,f,1662,1694,james2,
+marypr,"Mary, Princess Royal",0,f,1631,1660,char1,
+will3,William III,1,m,1650,1702,,marypr
+anne,Anne,1,f,1665,1714,james2,
+elizstu,Elizabeth Stuart,0,f,1596,1662,james1,
+sophia,Sophia of Hanover,0,f,1630,1714,,elizstu
+george1,George I,1,m,1660,1727,,sophia
+george2,George II,1,m,1683,1760,george1,
+fred,Prince Frederick,0,m,1707,1751,george2,
+george3,George III,1,m,1738,1820,fred,
+george4,George IV,1,m,1762,1830,george3,
+will4,William IV,1,m,1765,1837,george3,
+princeed,"Prince Edward, Duke of Kent and Strathearn",0,m,1767,1820,george3,
+victoria,Victoria,1,f,1819,1901,princeed,
+ed7,Edward VII,1,m,1841,1910,,victoria
+george5,George V,1,m,1865,1936,ed7,
+ed8,Edward VIII,1,m,1894,1972,george5,
+george6,George VI,1,m,1895,1952,george5,
+eliz2,Elizabeth II,1,f,1926,2022,george6,
+char3,Charles III,1,m,1948,,,eliz2
