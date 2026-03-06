@@ -32,11 +32,12 @@
     }
     span.box {
       display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 1px solid #000;
-      border-radius: 3px;
+      width: 12px;
+      height: 12px;
+      border: 1px solid #888;
+      border-radius: 2px;
       flex-shrink: 0;
+      vertical-align: middle;
     }
     span.mcra {
       background-color: #ccffff;
@@ -51,25 +52,47 @@
       background-color: #ffffcc;
     }
     div#legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      padding: 10px 16px;
-      margin-bottom: 12px;
+      padding: 4px 10px;
+      margin-bottom: 8px;
       background: #f8f9fa;
+      font-size: 0.875rem;
     }
-    div#legend h3 {
-      width: 100%;
-      margin: 0 0 4px 0;
-      font-size: 1rem;
+    .legend-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend-header span {
       font-weight: bold;
+    }
+    #legend-toggle {
+      background: none;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      padding: 0 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      color: #555;
+      line-height: 1.6;
+    }
+    #legend-toggle:hover {
+      background: #e9ecef;
+    }
+    #legend-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 14px;
+      padding: 4px 0;
+    }
+    #legend-items.hidden {
+      display: none;
     }
     .legend-item {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       white-space: nowrap;
     }
   </style>
@@ -150,11 +173,16 @@
     <div>
         <h2>Relationship Diagram</h2>
         <div id="legend">
-          <h3>Legend</h3>
-          <span class="legend-item"><span class="box mcra"></span> Most recent common ancestor</span>
-          <span class="legend-item"><span class="box from"></span> Monarch we're starting from</span>
-          <span class="legend-item"><span class="box to"></span> Monarch we're going to</span>
-          <span class="legend-item"><span class="box monarch"></span> Other monarchs</span>
+          <div class="legend-header">
+            <span>Legend</span>
+            <button type="button" id="legend-toggle" aria-expanded="true" aria-controls="legend-items" onclick="toggleLegend()">Hide</button>
+          </div>
+          <div id="legend-items">
+            <span class="legend-item"><span class="box mcra"></span> Most recent common ancestor</span>
+            <span class="legend-item"><span class="box from"></span> Monarch we're starting from</span>
+            <span class="legend-item"><span class="box to"></span> Monarch we're going to</span>
+            <span class="legend-item"><span class="box monarch"></span> Other monarchs</span>
+          </div>
         </div>
         <canvas id="canvas" width="800"></canvas>
       </div>
