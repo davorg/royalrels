@@ -39,12 +39,13 @@ The CSV has a header row with these columns:
 | `id` | Short alphanumeric identifier, e.g. `will1`, `hen2`, `eliz2` |
 | `name` | Full display name |
 | `parent` | `id` of one parent **already listed above this row** in the file; blank for the root |
+| `parent2` | `id` of a second parent (optional); used when both parents are in the file, e.g. Henry VIII has `parent=elizyork` and `parent2=hen7` |
 | `monarch` | `1` = this person was a monarch; `0` = non-monarch ancestor needed for lineage |
 | `gender` | `m` or `f` |
 | `birth` | Year, optionally prefixed with `c` for circa, e.g. `c1028` or `1133` |
 | `death` | Year, or blank if still living |
 
-**Important ordering rule:** a person's parent must appear **before** them in the CSV. If a parent is referenced before its own row is parsed, the script emits a warning and skips that person.
+**Important ordering rule:** both `parent` and `parent2` must appear **before** the child row in the CSV. If a referenced parent has not yet been parsed, the script emits a warning and skips that person.
 
 ## Regenerating `docs/data.js`
 
@@ -58,7 +59,13 @@ This overwrites `docs/data.js` with pre-computed relationship data for every pai
 
 ## Installing Perl Dependencies
 
-`Text::ParseWords` is a Perl core module. The other required modules must be installed from CPAN:
+`Text::ParseWords` is a Perl core module. The other required modules are declared in `cpanfile` and can be installed with:
+
+```bash
+cpanm --installdeps .
+```
+
+Or install them individually:
 
 ```bash
 cpanm Genealogy::Relationship Object::Pad JSON
@@ -95,18 +102,26 @@ There is currently **no automated test suite**. Manual verification steps:
 
 1. Add a row to `monarchs.csv` (maintain parent-before-child ordering; set `monarch=1`).
 2. If the new monarch's lineage requires non-monarch ancestors not already in the file, add those rows first (with `monarch=0`).
-3. Re-run `perl rels monarchs.csv` to regenerate `docs/data.js`.
-4. Commit both files.
+3. If both of the monarch's parents are present in the file, populate both `parent` and `parent2` so that relationship calculations cross both family lines correctly.
+4. Re-run `perl rels monarchs.csv` to regenerate `docs/data.js`.
+5. Commit both files.
 
 ### Fixing a relationship or lineage
 
-1. Correct the `parent` field in `monarchs.csv`.
+1. Correct the `parent` (and/or `parent2`) field in `monarchs.csv`.
 2. Re-run `perl rels monarchs.csv`.
 3. Commit both files.
 
 ### Modifying the Person class (`lib/Person.pm`)
 
-The class uses `Object::Pad` syntax (`class`, `field`, `:param`, `:reader`, `method`). Keep changes consistent with that module's API. After any change, regenerate `docs/data.js` to verify nothing broke.
+The class uses `Object::Pad` syntax (`class`, `field`, `:param`, `:reader`, `method`). Keep changes consistent with that module's API. Key fields and methods:
+
+- `id`, `name`, `monarch`, `gender`, `birth`, `death` – scalar fields, all `:param :reader`.
+- `parent`, `parent2` – optional parent links (`:param :reader = undef`); hold `Person` objects, not raw ids, after the `rels` script resolves them.
+- `parents()` – returns an arrayref of the parent `Person` objects that are set (used by `Genealogy::Relationship` to traverse both parent lines).
+- `as_hashref()` – serialises the object to a plain hashref for JSON output, converting `parent`/`parent2` back to their `id` strings.
+
+After any change, regenerate `docs/data.js` to verify nothing broke.
 
 ### Updating front-end display
 
@@ -116,4 +131,3 @@ Edit `docs/rels.js` or `docs/index.html` directly. No build step is needed for t
 
 - **`Genealogy::Relationship` and `Object::Pad` not available in all environments.** Install them via `cpanm` before running the Perl script (see above). In sandboxed CI environments these may not be pre-installed.
 - **`docs/data.js` is committed to the repository.** This avoids needing a server-side build step on GitHub Pages, but it means the file must be manually regenerated and committed whenever the data changes.
-- **No `cpanfile` or `Makefile.PL`.** There is no formal dependency manifest. Dependencies are documented in this file and must be installed manually.
