@@ -1,3 +1,11 @@
+function toggleLegend() {
+  var items  = document.getElementById('legend-items');
+  var btn    = document.getElementById('legend-toggle');
+  var hidden = items.classList.toggle('hidden');
+  btn.textContent = hidden ? 'Show' : 'Hide';
+  btn.setAttribute('aria-expanded', String(!hidden));
+}
+
 function updateOGTags(title, description) {
   var ogTitle = document.querySelector('meta[property="og:title"]');
   var ogDescription = document.querySelector('meta[property="og:description"]');

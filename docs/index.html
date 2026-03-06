@@ -30,38 +30,81 @@
     .dropdown-container .form-group {
       width: 49%; /* Reduced width */
     }
-    span.box {
+    div#legend span.box {
       display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 1px solid #000;
+      width: 4px;
+      height: 4px;
+      min-width: 4px;
+      min-height: 4px;
+      max-width: 4px;
+      max-height: 4px;
+      border: 1px solid #888;
+      border-radius: 1px;
+      flex-shrink: 0;
+      vertical-align: middle;
     }
-    span.mcra {
+    div#legend span.box.mcra {
       background-color: #ccffff;
     }
-    span.from {
+    div#legend span.box.from {
       background-color: #ccffcc;
     }
-    span.to {
+    div#legend span.box.to {
       background-color: #ffcccc;
     }
-    span.monarch {
+    div#legend span.box.monarch {
       background-color: #ffffcc;
     }
     div#legend {
-      border: 1px solid #000;
-      padding: 10px;
-      height: auto;
-      align-self: start;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 4px 10px;
+      margin-bottom: 8px;
+      background: #f8f9fa;
+      font-size: 0.875rem;
     }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: 4fr 1fr; /* adjust as needed */
-      gap: 20px; /* adjust as needed */
+    .legend-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .grid-container > div:first-child {
-      max-width: 100%; /* adjust as needed */
+    .legend-header span {
+      font-weight: bold;
+    }
+    #legend-toggle {
+      background: none;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      padding: 0 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      color: #555;
+      line-height: 1.6;
+    }
+    #legend-toggle:hover {
+      background: #e9ecef;
+    }
+    #legend-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 14px;
+      padding: 4px 0;
+      overflow: hidden;
+      max-height: 500px;
+      opacity: 1;
+      transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+    }
+    #legend-items.hidden {
+      max-height: 0;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
     }
   </style>
 </head>
@@ -138,19 +181,22 @@
       <div id="relationship"></div>
     </div>
 
-    <div class="grid-container">
-      <div>
+    <div>
         <h2>Relationship Diagram</h2>
+        <div id="legend">
+          <div class="legend-header">
+            <span>Legend</span>
+            <button type="button" id="legend-toggle" aria-expanded="true" aria-controls="legend-items" onclick="toggleLegend()">Hide</button>
+          </div>
+          <div id="legend-items">
+            <span class="legend-item"><span class="box mcra"></span> Most recent common ancestor</span>
+            <span class="legend-item"><span class="box from"></span> Monarch we're starting from</span>
+            <span class="legend-item"><span class="box to"></span> Monarch we're going to</span>
+            <span class="legend-item"><span class="box monarch"></span> Other monarchs</span>
+          </div>
+        </div>
         <canvas id="canvas" width="800"></canvas>
       </div>
-      <div id="legend">
-        <h3>Legend</h3>
-        <p><span class="box mcra"></span> Most recent common ancestor<br>
-          <span class="box from"></span> Monarch we're starting from<br>
-          <span class="box to"></span> Monarch we're going to<br>
-          <span class="box monarch"></span> Other monarchs</p>
-      </div>
-    </div>
 
   </div>
   </main>
