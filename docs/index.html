@@ -35,6 +35,8 @@
       width: 20px;
       height: 20px;
       border: 1px solid #000;
+      border-radius: 3px;
+      flex-shrink: 0;
     }
     span.mcra {
       background-color: #ccffff;
@@ -49,19 +51,26 @@
       background-color: #ffffcc;
     }
     div#legend {
-      border: 1px solid #000;
-      padding: 10px;
-      height: auto;
-      align-self: start;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 10px 16px;
+      margin-bottom: 12px;
+      background: #f8f9fa;
     }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: 4fr 1fr; /* adjust as needed */
-      gap: 20px; /* adjust as needed */
+    div#legend h3 {
+      width: 100%;
+      margin: 0 0 4px 0;
+      font-size: 1rem;
+      font-weight: bold;
     }
-    .grid-container > div:first-child {
-      max-width: 100%; /* adjust as needed */
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
     }
   </style>
 </head>
@@ -138,19 +147,17 @@
       <div id="relationship"></div>
     </div>
 
-    <div class="grid-container">
-      <div>
+    <div>
         <h2>Relationship Diagram</h2>
+        <div id="legend">
+          <h3>Legend</h3>
+          <span class="legend-item"><span class="box mcra"></span> Most recent common ancestor</span>
+          <span class="legend-item"><span class="box from"></span> Monarch we're starting from</span>
+          <span class="legend-item"><span class="box to"></span> Monarch we're going to</span>
+          <span class="legend-item"><span class="box monarch"></span> Other monarchs</span>
+        </div>
         <canvas id="canvas" width="800"></canvas>
       </div>
-      <div id="legend">
-        <h3>Legend</h3>
-        <p><span class="box mcra"></span> Most recent common ancestor<br>
-          <span class="box from"></span> Monarch we're starting from<br>
-          <span class="box to"></span> Monarch we're going to<br>
-          <span class="box monarch"></span> Other monarchs</p>
-      </div>
-    </div>
 
   </div>
   </main>
