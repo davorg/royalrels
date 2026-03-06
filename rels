@@ -35,6 +35,16 @@ while (<>) {
     $p{parent} = undef;
   }
 
+  if ($p{parent2}) {
+    if (!exists $people{$p{parent2}}) {
+      warn "$p{name} -> $p{parent2}\n";
+      next;
+    }
+    $p{parent2} = $people{$p{parent2}};
+  } else {
+    $p{parent2} = undef;
+  }
+
   my $person = Person->new(%p);
 
   $people{$person->id} = $person;
