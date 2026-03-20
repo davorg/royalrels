@@ -66,15 +66,18 @@ for my $m1 (@monarchs) {
   for my $m2 (@monarchs2) {
     next if $m1 eq $m2;
 
-    my $ancestors = $rel->get_relationship_ancestors($people{$m1}, $people{$m2});
-    $ancestors->[0] = [ reverse map { $_->id } @{$ancestors->[0]} ];
-    $ancestors->[1] = [ reverse map { $_->id } @{$ancestors->[1]} ];
+    eval {
+      my $ancestors = $rel->get_relationship_ancestors($people{$m1}, $people{$m2});
+      $ancestors->[0] = [ reverse map { $_->id } @{$ancestors->[0]} ];
+      $ancestors->[1] = [ reverse map { $_->id } @{$ancestors->[1]} ];
 
-    $rels{$people{$m1}->id}{$people{$m2}->id} = {
-      rel  => $rel->get_relationship($people{$m1}, $people{$m2}),
-      mrca => $rel->most_recent_common_ancestor($people{$m1}, $people{$m2})->id,
-      ancestors => $ancestors,
+      $rels{$people{$m1}->id}{$people{$m2}->id} = {
+        rel  => $rel->get_relationship($people{$m1}, $people{$m2}),
+        mrca => $rel->most_recent_common_ancestor($people{$m1}, $people{$m2})->id,
+        ancestors => $ancestors,
+      };
     };
+    warn "No relationship found between $m1 and $m2\n" if $@;
   }
 }
 

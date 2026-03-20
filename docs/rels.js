@@ -102,27 +102,38 @@ function handleDropdownChange() {
     var monarchId2 = toDropdown.options[toDropdown.selectedIndex].value;
 
     // Get rels[monarch1][monarch2] and rels[monarch2][monarch1]
-    var rel1 = rels[monarchId1][monarchId2].rel;
-    var rel2 = rels[monarchId2][monarchId1].rel;
+    var relData1 = rels[monarchId1] && rels[monarchId1][monarchId2];
+    var relData2 = rels[monarchId2] && rels[monarchId2][monarchId1];
 
     var monarch1 = people[monarchId1];
     var monarch2 = people[monarchId2];
 
     // Update the relationship div to say what the relationship is
     var relationshipDiv = document.getElementById('relationship');
-    relationshipDiv.innerHTML = monarch1.name + ' is ' + rel1 + ' of ' + monarch2.name + '<br>'
-                              + monarch2.name + ' is ' + rel2 + ' of ' + monarch1.name;
+    if (relData1 && relData2) {
+      var rel1 = relData1.rel;
+      var rel2 = relData2.rel;
+      relationshipDiv.innerHTML = monarch1.name + ' is ' + rel1 + ' of ' + monarch2.name + '<br>'
+                                + monarch2.name + ' is ' + rel2 + ' of ' + monarch1.name;
 
-    // Update OG tags
-    var ogTitle = monarch1.name + ' and ' + monarch2.name + ' Relationship';
-    var ogDescription = 'Discover the relationship between ' + monarch1.name + ' and ' + monarch2.name;
-    updateOGTags(ogTitle, ogDescription);
+      // Update OG tags
+      var ogTitle = monarch1.name + ' and ' + monarch2.name + ' Relationship';
+      var ogDescription = 'Discover the relationship between ' + monarch1.name + ' and ' + monarch2.name;
+      updateOGTags(ogTitle, ogDescription);
 
-    // Get the rels[monarch1][monarch2].ancestors
-    var ancestors = rels[monarchId1][monarchId2].ancestors;
+      // Get the rels[monarch1][monarch2].ancestors
+      var ancestors = relData1.ancestors;
 
-    // Draw the ancestors in a canvas element with id="canvas"
-    drawRelationship(ancestors);
+      // Draw the ancestors in a canvas element with id="canvas"
+      drawRelationship(ancestors);
+    } else {
+      relationshipDiv.innerHTML = 'No known family relationship between ' + monarch1.name + ' and ' + monarch2.name + '.';
+      // Clear the canvas
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      canvas.height = 0;
+    }
   }
 };
 
