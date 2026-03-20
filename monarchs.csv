@@ -20,7 +20,7 @@ will2,William II,will1,,1,m,c1057,1100
 hen1,Henry I,will1,matflanders,1,m,c1068,1135
 adela,Adela of Normandy,will1,,0,f,c1067,1137
 stephen,Stephen,adela,,1,m,1092/1096,1154
-matilda,Matilda,hen1,matscot,1,f,1102,1167
+matilda,Matilda,matscot,hen1,1,f,1102,1167
 hen2,Henry II,matilda,,1,m,1133,1189
 rich1,Richard I,hen2,,1,m,1157,1199
 john,John,hen2,,1,m,1166,1216
