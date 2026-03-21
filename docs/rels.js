@@ -7,6 +7,8 @@ function toggleLegend() {
 }
 
 function updateOGTags(title, description) {
+  document.title = title;
+
   var ogTitle = document.querySelector('meta[property="og:title"]');
   var ogDescription = document.querySelector('meta[property="og:description"]');
 
@@ -117,7 +119,7 @@ function handleDropdownChange() {
                                 + monarch2.name + ' is ' + rel2 + ' of ' + monarch1.name;
 
       // Update OG tags
-      var ogTitle = monarch1.name + ' and ' + monarch2.name + ' Relationship';
+      var ogTitle = 'Royal Relationships - ' + monarch1.name + ' to ' + monarch2.name;
       var ogDescription = 'Discover the relationship between ' + monarch1.name + ' and ' + monarch2.name;
       updateOGTags(ogTitle, ogDescription);
 
@@ -128,6 +130,10 @@ function handleDropdownChange() {
       drawRelationship(ancestors);
     } else {
       relationshipDiv.innerHTML = 'No known family relationship between ' + monarch1.name + ' and ' + monarch2.name + '.';
+      // Update OG tags
+      var ogTitle = 'Royal Relationships - ' + monarch1.name + ' to ' + monarch2.name;
+      var ogDescription = 'No known family relationship between ' + monarch1.name + ' and ' + monarch2.name;
+      updateOGTags(ogTitle, ogDescription);
       // Clear the canvas
       var canvas = document.getElementById('canvas');
       var ctx = canvas.getContext('2d');
