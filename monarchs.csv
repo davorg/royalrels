@@ -1,14 +1,24 @@
 id,name,parent,parent2,monarch,gender,birth,death
 alfred,Alfred the Great,,,1,m,c849,899
 edeld,Edward the Elder,alfred,,1,m,c874,924
+athelstan,Æthelstan,edeld,,1,m,c894,939
 aelfthryth,Ælfthryth of Wessex,alfred,,0,f,c877,929
 edm1,Edmund I,edeld,,1,m,c921,946
+eadred,Eadred,edeld,,1,m,c923,955
+eadwig,Eadwig,edm1,,1,m,c940,959
 arnulf1,"Arnulf I, Count of Flanders",aelfthryth,,0,m,c890,965
 edgar,Edgar the Peaceable,edm1,,1,m,c943,975
+edmartyr,Edward the Martyr,edgar,,1,m,c962,978
 bald3fl,"Baldwin III, Count of Flanders",arnulf1,,0,m,c940,962
 aethred,Æthelred the Unready,edgar,,1,m,c966,1016
+sweyn,Sweyn Forkbeard,,,1,m,c960,1014
 arnulf2,"Arnulf II, Count of Flanders",bald3fl,,0,m,c961,988
 edmiron,Edmund Ironside,aethred,,1,m,c990,1016
+cnut,Cnut the Great,,,1,m,c990,1035
+harold1,Harold Harefoot,cnut,,1,m,c1015,1040
+harthacnut,Harthacnut,cnut,,1,m,c1016,1042
+edconf,Edward the Confessor,aethred,,1,m,c1003,1066
+harold2,Harold Godwinson,,,1,m,c1022,1066
 bald4fl,"Baldwin IV, Count of Flanders",arnulf2,,0,m,c980,1035
 edexile,Edward the Exile,edmiron,,0,m,c1016,1057
 bald5fl,"Baldwin V, Count of Flanders",bald4fl,,0,m,c1012,1067
